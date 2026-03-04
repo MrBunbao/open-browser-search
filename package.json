@@ -13,12 +13,6 @@
       "title": "Search Websites",
       "description": "Search any saved website with autocomplete, open results in your preferred browser",
       "mode": "view"
-    },
-    {
-      "name": "manage-saved-sites",
-      "title": "Manage Saved Sites",
-      "description": "Add, edit, and delete saved search sites",
-      "mode": "view"
     }
   ],
   "preferences": [

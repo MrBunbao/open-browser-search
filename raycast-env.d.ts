@@ -24,14 +24,10 @@ declare type Preferences = ExtensionPreferences
 declare namespace Preferences {
   /** Preferences accessible in the `search-any-site` command */
   export type SearchAnySite = ExtensionPreferences & {}
-  /** Preferences accessible in the `manage-saved-sites` command */
-  export type ManageSavedSites = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
   /** Arguments passed to the `search-any-site` command */
   export type SearchAnySite = {}
-  /** Arguments passed to the `manage-saved-sites` command */
-  export type ManageSavedSites = {}
 }
 
