@@ -159,30 +159,85 @@ def draw_icon():
         fill=(90, 90, 130, 90),
     )
 
-    # === Content Area - subtle lines suggesting a webpage ===
-    content_top = sy2 + 24
-    content_left = bx1 + 26
-    content_max_w = (bx2 - 26) - content_left
+    # === Content Area - Globe icons representing browsers ===
+    content_area_top = sy2 + 20
+    content_area_bottom = by2 - 16
+    content_cx = (bx1 + bx2) // 2
+    content_area_h = content_area_bottom - content_area_top
 
-    lines_data = [
-        (0, 0.90, 50),
-        (22, 0.75, 40),
-        (44, 0.60, 30),
-        (72, 0.85, 40),
-        (94, 0.50, 30),
-        (116, 0.70, 25),
+    def draw_globe(img, cx, cy, radius, alpha, color_tint=(255, 255, 255)):
+        """Draw a minimalist globe icon (circle + meridian + equator)."""
+        layer = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(layer)
+        r, g, b = color_tint
+        stroke = max(2, radius // 10)
+
+        # Outer circle
+        ld.ellipse(
+            [cx - radius, cy - radius, cx + radius, cy + radius],
+            outline=(r, g, b, alpha),
+            width=stroke,
+        )
+
+        # Horizontal equator line
+        ld.arc(
+            [cx - radius, cy - radius, cx + radius, cy + radius],
+            start=0, end=360,
+            fill=(r, g, b, alpha),
+            width=stroke,
+        )
+
+        # Vertical meridian (full ellipse)
+        meridian_w = radius * 0.45
+        ld.ellipse(
+            [cx - meridian_w, cy - radius, cx + meridian_w, cy + radius],
+            outline=(r, g, b, alpha),
+            width=stroke,
+        )
+
+        # Horizontal line through center
+        ld.line(
+            [(cx - radius, cy), (cx + radius, cy)],
+            fill=(r, g, b, alpha),
+            width=stroke,
+        )
+
+        # Upper latitude line
+        lat_offset = radius * 0.45
+        lat_w = radius * 0.85
+        ld.arc(
+            [cx - lat_w, cy - lat_offset - radius * 0.3,
+             cx + lat_w, cy - lat_offset + radius * 0.3],
+            start=0, end=360,
+            fill=(r, g, b, int(alpha * 0.7)),
+            width=max(1, stroke - 1),
+        )
+
+        # Lower latitude line
+        ld.arc(
+            [cx - lat_w, cy + lat_offset - radius * 0.3,
+             cx + lat_w, cy + lat_offset + radius * 0.3],
+            start=0, end=360,
+            fill=(r, g, b, int(alpha * 0.7)),
+            width=max(1, stroke - 1),
+        )
+
+        return Image.alpha_composite(img, layer)
+
+    # Three globes arranged horizontally in the content area
+    globe_r = 32
+    globe_cy = content_area_top + content_area_h // 2
+    globe_spacing = 105
+    globes = [
+        (content_cx - globe_spacing, globe_cy, 130, (180, 210, 255)),   # blue-white
+        (content_cx, globe_cy, 140, (255, 255, 255)),                    # white
+        (content_cx + globe_spacing, globe_cy, 130, (200, 180, 255)),   # purple-white
     ]
 
-    for y_off, width_pct, alpha in lines_data:
-        ly = content_top + y_off
-        if ly + 7 > by2 - 16:
-            break
-        lw = int(content_max_w * width_pct)
-        draw.rounded_rectangle(
-            [content_left, ly, content_left + lw, ly + 7],
-            radius=3,
-            fill=(255, 255, 255, alpha),
-        )
+    for gx, gy, ga, gc in globes:
+        img = draw_globe(img, gx, gy, globe_r, ga, gc)
+
+    draw = ImageDraw.Draw(img)
 
     return img
 
