@@ -4,7 +4,7 @@
   "title": "Open Browser Search",
   "description": "Search any website and choose which browser opens the results",
   "icon": "cmd-icon.png",
-  "author": "admad",
+  "author": "MrBunbao",
   "categories": ["Productivity", "Web"],
   "license": "MIT",
   "commands": [

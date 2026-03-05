@@ -15,13 +15,6 @@ Based on [Universal Website Search](https://www.raycast.com/pernielsentikaer/any
 - DuckDuckGo bang stripping for cleaner suggestions
 - Favicon display for saved sites
 
-## Commands
-
-| Command | Description | Default Shortcut |
-|---------|-------------|-----------------|
-| **Search Websites** | Search any saved site with autocomplete | — |
-| **Manage Saved Sites** | Add, edit, and delete saved search sites | — |
-
 ## Keyboard Shortcuts
 
 | Shortcut | Action |
@@ -50,31 +43,14 @@ When opening a search result, the browser is chosen in this order:
 2. **Global default browser** — set via Raycast extension preferences
 3. **System default browser** — macOS default
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Lint and format
-npm run lint
-npm run fix-lint
-```
-
 ## Default Search Sites
 
 The extension ships with these pre-configured sites:
 
-- Bing, DuckDuckGo, GitHub, Google, npm, Reddit, Stack Overflow, Twitter, Wikipedia (en), YouTube
+Bing, DuckDuckGo, GitHub, Google, npm, Reddit, Stack Overflow, Twitter, Wikipedia (en), YouTube
 
-Sites are stored as JSON in the Raycast support directory and can be fully customized.
+Sites are stored locally and can be fully customized.
 
 ## Credits
 
-Inspired by [Universal Website Search](https://www.raycast.com/pernielsentikaer/any-website-search) (any-website-search) by pernielsentikaer. The core search and suggestion architecture is based on that extension, with browser selection as the primary addition.
+Inspired by [Universal Website Search](https://www.raycast.com/pernielsentikaer/any-website-search) by pernielsentikaer.
