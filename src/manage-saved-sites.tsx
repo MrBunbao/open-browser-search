@@ -7,12 +7,7 @@ import { loadSavedSites } from "./saved-sites";
 import { SavedSites } from "./types";
 import { strEq } from "./utils";
 
-/** Standalone command entry point */
-export default function ManageSavedSitesCommand() {
-  return <ManageSavedSitesList />;
-}
-
-/** Reusable component — can be used standalone or pushed from search */
+/** Reusable component — pushed from search via Cmd+, */
 export function ManageSavedSitesList() {
   const [savedSites, setSavedSites] = useState<SavedSites>(() => loadSavedSites());
   const [selectedSiteTitle, setSelectedSiteTitle] = useState("");

@@ -123,7 +123,7 @@ export default function SearchAnySite() {
           title="Manage Saved Sites"
           icon={Icon.Gear}
           target={<ManageSavedSitesList />}
-          shortcut={{ modifiers: ["cmd"], key: "k" }}
+          shortcut={{ modifiers: ["cmd"], key: "," }}
           onPop={reloadSites}
         />
       </ActionPanel>
@@ -146,14 +146,33 @@ export default function SearchAnySite() {
         </List.Dropdown>
       }
     >
-      {suggestions.map((suggestion, i) => (
-        <List.Item
-          key={`suggestion-${i}`}
-          title={suggestion}
-          icon={i === 0 && isDirectUrl ? Icon.Link : i === 0 ? Icon.MagnifyingGlass : Icon.Text}
-          actions={buildActions(suggestion)}
+      {suggestions.length === 0 ? (
+        <List.EmptyView
+          title="Type to search"
+          description="Enter a query or URL to get started"
+          icon={Icon.MagnifyingGlass}
+          actions={
+            <ActionPanel>
+              <Action.Push
+                title="Manage Saved Sites"
+                icon={Icon.Gear}
+                target={<ManageSavedSitesList />}
+                shortcut={{ modifiers: ["cmd"], key: "," }}
+                onPop={reloadSites}
+              />
+            </ActionPanel>
+          }
         />
-      ))}
+      ) : (
+        suggestions.map((suggestion, i) => (
+          <List.Item
+            key={`suggestion-${i}`}
+            title={suggestion}
+            icon={i === 0 && isDirectUrl ? Icon.Link : i === 0 ? Icon.MagnifyingGlass : Icon.Text}
+            actions={buildActions(suggestion)}
+          />
+        ))
+      )}
     </List>
   );
 }

@@ -23,7 +23,7 @@ export async function parseSuggestionsFromGoogle(response: Response, searchStrin
 
   for (const match of suggestionMatches) {
     const suggestion = match[1];
-    if (!strEq(suggestion, searchString)) {
+    if (suggestion !== undefined && !strEq(suggestion, searchString)) {
       suggestions.push(htmlDecode(suggestion));
     }
   }
@@ -34,7 +34,8 @@ export async function parseSuggestionsFromGoogle(response: Response, searchStrin
 
 export async function parseSuggestionsFromDuckDuckGo(response: Response, searchString: string): Promise<string[]> {
   const json = await response.text();
-  const ddgSuggestions = JSON.parse(json)[1] as string[];
+  const parsed = JSON.parse(json);
+  const ddgSuggestions = Array.isArray(parsed?.[1]) ? (parsed[1] as string[]) : [];
   const suggestions: string[] = [];
 
   for (const suggestion of ddgSuggestions) {

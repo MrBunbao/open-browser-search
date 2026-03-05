@@ -3,7 +3,7 @@
   "name": "open-browser-search",
   "title": "Open Browser Search",
   "description": "Search any website and choose which browser opens the results",
-  "icon": "search-icon.png",
+  "icon": "cmd-icon.png",
   "author": "admad",
   "categories": ["Productivity", "Web"],
   "license": "MIT",
