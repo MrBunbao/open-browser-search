@@ -1,4 +1,4 @@
-import { List, ActionPanel, Action, Icon, getPreferenceValues, Clipboard, Application } from "@raycast/api";
+import { List, ActionPanel, Action, Icon, getPreferenceValues, Clipboard, Application, environment } from "@raycast/api";
 import { useState, useEffect, useCallback } from "react";
 import { useBrowsers, findBrowserByBundleId } from "./browsers";
 import { loadSavedSites } from "./saved-sites";
@@ -19,7 +19,13 @@ export default function SearchAnySite() {
   const [searchText, setSearchText] = useState("");
   const [savedSites, setSavedSites] = useState<SavedSites>(() => loadSavedSites());
   const [selectedSite, setSelectedSite] = useState<string>(
-    () => savedSites.defaultSiteTitle ?? savedSites.items[0]?.title ?? "",
+    () =>
+      (environment.commandName === "hci"
+        ? savedSites.items.find((site) => site.title.toLowerCase() === "servicenow")?.title
+        : undefined) ??
+      savedSites.defaultSiteTitle ??
+      savedSites.items[0]?.title ??
+      "",
   );
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const { data: browsers, isLoading: browsersLoading } = useBrowsers();

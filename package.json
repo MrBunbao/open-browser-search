@@ -3,16 +3,28 @@
   "name": "open-browser-search",
   "title": "Browser Search",
   "description": "Search any website and choose which browser opens the results",
-  "icon": "cmd-icon.png",
+  "icon": "cmd-icon-modern.png",
   "author": "MrBunbao",
-  "categories": ["Productivity", "Web"],
-  "platforms": ["macOS"],
+  "categories": [
+    "Productivity",
+    "Web"
+  ],
+  "platforms": [
+    "macOS"
+  ],
   "license": "MIT",
   "commands": [
     {
       "name": "search-any-site",
       "title": "Search Websites",
       "description": "Search any saved website with autocomplete, open results in your preferred browser",
+      "mode": "view"
+    },
+    {
+      "name": "hci",
+      "title": "HCI",
+      "subtitle": "Search SERVICENOW",
+      "description": "Search HCI SERVICENOW",
       "mode": "view"
     }
   ],
@@ -33,9 +45,18 @@
       "required": false,
       "description": "Search engine for autocomplete suggestions",
       "data": [
-        { "title": "None", "value": "__NONE__" },
-        { "title": "DuckDuckGo", "value": "ddg" },
-        { "title": "Google", "value": "google" }
+        {
+          "title": "None",
+          "value": "__NONE__"
+        },
+        {
+          "title": "DuckDuckGo",
+          "value": "ddg"
+        },
+        {
+          "title": "Google",
+          "value": "google"
+        }
       ]
     },
     {
@@ -68,7 +89,7 @@
     "@types/react": "19.0.10",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "build": "ray build -e dist",
